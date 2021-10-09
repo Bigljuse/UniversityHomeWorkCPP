@@ -21,9 +21,9 @@ void Work_1_Algoritm_Evklida()
 
 		if (cin.fail())
 		{
-			// Если в cin было подано не число, то для разблокировки потока необходимо разблокировать поток
+			// Unlocking cin from (translate char to int) error
 			cin.clear();
-			// После разблокировки потока идёт игнор уже неверно введённых данных в строке, посути мы очишаем для подготовки к новому вводу.
+			// Ignoring all data in cin buffer before, preparing for new input from console
 			cin.ignore(UINT_MAX,'\n');
 
 			cout << "Не вводите символы!" << '\n';
@@ -37,7 +37,7 @@ void Work_1_Algoritm_Evklida()
 	int first_Buffer = firstNumber;
 	int second_Buffer = secondNumber;
 
-	cout << "Наибольший общий делитель чисел через метод деления " << firstNumber << " и " << secondNumber << ": ";
+	cout << "Наибольший общий делитель чисел через метод деления " << first_Buffer << " и " << second_Buffer << ": ";
 
 	while (firstNumber != 0 && secondNumber != 0)
 	{
@@ -48,10 +48,7 @@ void Work_1_Algoritm_Evklida()
 	};
 	cout << firstNumber + secondNumber << '\n';
 
-	 firstNumber  = first_Buffer;
-	 secondNumber = second_Buffer;
-
-	cout << "Наибольший общий делитель чисел через метод вычитания " << firstNumber << " и " << secondNumber << ": ";
+	cout << "Наибольший общий делитель чисел через метод вычитания " << first_Buffer << " и " << second_Buffer << ": ";
 
 	while (firstNumber != secondNumber)
 	{
