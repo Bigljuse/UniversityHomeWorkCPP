@@ -695,8 +695,8 @@ void Work_8_Count_Sellers_Money()
 	cout << "2.Продавец: " << max_Comission[1] << " выручил денег " << max_Comission[0] << '\n';
 	cout << "2.Продавец: " << min_Comission[1] << " выручил денег " << min_Comission[0] << '\n';
 	cout << "3.Общая сумма денег: " << all_Money << '\n';
-	cout << "4.Общая сумма комиссионных : " << all_Money << '\n';
-	cout << "5.Общая сумма денег, прошедшая через руки : " << all_Money << '\n';
+	cout << "4.Общая сумма комиссионных : " << all_Comission << '\n';
+	cout << "5.Общая сумма денег, прошедшая через руки : " << all_Money_And_Comission << '\n';
 }
 
 string Work_9_NumSystem_Translator(string string_Numbers, int base_System = 10, int Target_System = 16)
