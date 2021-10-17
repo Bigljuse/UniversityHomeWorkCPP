@@ -140,7 +140,7 @@ void Work_2()
 		return;
 	}
 }
-\
+
 void Work_3_Cout_rectangle(float* x, float a, float b) {
 
 	*x = a * b;
