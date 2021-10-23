@@ -13,13 +13,13 @@ void Work_18()
 	bool NumberZeroWasFound = false;
 	int height = 0;
 	int avarage = 0;
+	int peoplehigherAvarage = 0;
 
 	vector<int> arrayOfheight;
 
 	cout << " **** Анализ роста учеников ***\n" <<
 		"Введите рост(см) и нажмите <Enter>.\n" <<
 		"Для завершения введите 0 и нажмите < Enter>\n";
-
 
 	do
 	{
@@ -45,6 +45,16 @@ void Work_18()
 	} while (NumberZeroWasFound == false);
 
 	for (auto number : arrayOfheight) {
-
+		avarage += number;
 	}
+
+	avarage /= arrayOfheight.size();
+
+	for (auto number : arrayOfheight) {
+		if (number > avarage)
+			peoplehigherAvarage++;
+	}
+
+	cout << "Средний рост: " << avarage;
+	cout << "У "<< peoplehigherAvarage << "-x человек рост превышает средний." << avarage;
 }
