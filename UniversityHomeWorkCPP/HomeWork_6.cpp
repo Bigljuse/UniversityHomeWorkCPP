@@ -24,13 +24,13 @@ void Work_18()
 	do
 	{
 		cout << "-> ";
-		cin >> height;;
+		cin >> height;
 
 		if (cin.fail())
 		{
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
-			// Ignoring all data in cin buffer before, preparing for new input from console
+			// Ignoring all data in cin buffer before preparing for new input from console
 			cin.ignore(UINT_MAX, '\n');
 
 			cout << "\nֽו גגמהטעו סטלגמכû!" << '\n';
