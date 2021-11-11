@@ -1621,6 +1621,12 @@ void HomeWork_4_Work_6()
 			roman_Number_Equalities_Possible_Counter = 0;
 		}
 
+		if (next_Roman_Number - roman_Number < 0)
+		{
+			cout << "Неверно введено римское число\n";
+			return;
+		}
+
 		if (next_Roman_Number < roman_Number)
 		{
 			// Если следующее значение римской цифры меньше предыдущей, то вычитает это число из финального числа перевода
@@ -2771,6 +2777,8 @@ int main()
 	SetConsoleOutputCP(1251);
 	std::ios::sync_with_stdio(false);
 	setlocale(LC_CTYPE, "rus");
+
+	HomeWork_ShowWorks();
 
 	system("pause");
 	return 0;
