@@ -75,7 +75,7 @@ void HomeWork_Balls()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
 				cout << "Ошибка, вы ввели неправильно число!\n";

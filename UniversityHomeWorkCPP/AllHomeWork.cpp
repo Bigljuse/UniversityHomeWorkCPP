@@ -48,7 +48,7 @@ void HomeWork_1_Work_2()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
 				cout << "Ошибка, вы ввели в первую переменную не число!\n";
@@ -113,7 +113,7 @@ void HomeWork_1_Work_3(float b = 0, float c = 0, bool fromFunction = false)
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
 				cout << "Ошибка, вы ввели в первую переменную не число!\n";
@@ -179,7 +179,7 @@ void HomeWork_1_Work_4()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
 				cout << "Ошибка, вы ввели в первую переменную не число!\n";
@@ -410,7 +410,7 @@ void HomeWork_2_Work_1()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
 				cout << "Ошибка, вы ввели неправильную высоту!\n";
@@ -481,7 +481,7 @@ void HomeWork_2_Work_2()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
 				cout << "Ошибка, вы ввели в x не число!\n";
@@ -563,7 +563,7 @@ void HomeWork_2_Work_3()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
 				cout << "Ошибка, вы ввели неправильно x!\n";
@@ -615,7 +615,7 @@ void HomeWork_2_Work_4()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
 				cout << "Ошибка, вы ввели не натуральное число!\n";
@@ -708,7 +708,7 @@ void HomeWork_3_Work_1() {
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
 				cout << "Ошибка, вы ввели неправильно S!\n";
@@ -782,7 +782,7 @@ void HomeWork_3_Work_2() {
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
 				cout << "Ошибка, вы ввели неправильно S!\n";
@@ -820,7 +820,7 @@ void HomeWork_3_Work_3()
 	cout << "3) Задача «Копирование файла». Создать на диске текстовый файл и скопировать его на экран.\n";
 
 	cin.clear();
-	cin.ignore(UINT_MAX, '\n');
+	cin.ignore(WINT_MAX, '\n');
 
 	string fileName = "Preparing.txt";
 	string textInput = "";
@@ -853,7 +853,7 @@ void HomeWork_3_Work_4()
 	cout << "4) Задача «Фильтр». Вывести на экран только числа из созданного Вами на диске текстового файла, содержащего буквы и числа.\n";
 
 	cin.clear();
-	cin.ignore(UINT_MAX, '\n');
+	cin.ignore(WINT_MAX, '\n');
 
 	string fileName = "Preparing.txt";
 	string textInput = "";
@@ -959,7 +959,7 @@ void HomeWork_3_Work_5()
 	cout << "Введите любую строку: ";
 
 	cin.clear();
-	cin.ignore(UINT_MAX, '\n');
+	cin.ignore(WINT_MAX, '\n');
 
 	string fileName = "Preparing.txt";
 	string textInput = "";
@@ -1003,7 +1003,7 @@ void HomeWork_4_Work_1()
 {
 	cout << "1) Задача «Файл». Создать файл, записать в него 10 чисел, закрыть, потом вновь открыть файл и найти сумму чисел.\n";
 	cin.clear();
-	cin.ignore(UINT_MAX, '\n');
+	cin.ignore(WINT_MAX, '\n');
 
 	string fileName = "Preparing.txt";
 	string textInput = "";
@@ -1131,7 +1131,7 @@ void HomeWork_4_Work_2()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
 				cout << "Ошибка, вы ввели не число!\n";
@@ -1185,7 +1185,7 @@ int  HomeWork_4_Work_3_Cout_rectangle()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
 				cout << "Ошибка, вы ввели неправильно первую сторону!\n";
@@ -1236,7 +1236,7 @@ int  HomeWork_4_Work_3_Count_triangle() {
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
 				cout << "Ошибка, вы ввели неправильно первую сторону!\n";
@@ -1274,7 +1274,7 @@ int  HomeWork_4_Work_3_Count_cirqle() {
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
 				cout << "Ошибка, вы ввели неправильно радиус круга!\n";
@@ -1331,7 +1331,7 @@ void HomeWork_4_Work_3() {
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
 				cout << "Ошибка, вы ввели не число!\n";
@@ -1560,7 +1560,7 @@ void HomeWork_4_Work_6()
 			correctRomanNumber = true;
 
 		cin.clear();
-		cin.ignore(UINT_MAX, '\n');
+		cin.ignore(WINT_MAX, '\n');
 
 		counter = 0;
 
@@ -1790,7 +1790,7 @@ void HomeWork_4_Work_8()
 void HomeWork_4_Work_9()
 {
 	cin.clear();
-	cin.ignore(UINT_MAX, '\n');
+	cin.ignore(WINT_MAX, '\n');
 
 	string string_Numbers = "";
 	int base_System = 10;
@@ -1831,7 +1831,7 @@ void HomeWork_4_Work_9()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			if (SecondNumberIsCorrect == false)
 				cout << "Ошибка, вы ввели неправильно изначальную систему счисления!\n";
@@ -2037,7 +2037,7 @@ void HomeWork_5_Work_1()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
 				cout << "Ошибка, вы ввели неправильное первое число!\n";
@@ -2090,7 +2090,7 @@ void HomeWork_5_Work_2()
 		if (cin.fail() || correctNumber < 0)
 		{
 			cin.clear();
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 			cout << "Вы ввели неправильный диапазон, он начинаеться с 0\n";
 		}
 		else
@@ -2122,7 +2122,7 @@ void HomeWork_5_Work_3_number8()
 	cout << "4) 8.Преобразование текста в цепочку ASCII-кодов.\n";
 
 	cin.clear();
-	cin.ignore(UINT_MAX, '\n');
+	cin.ignore(WINT_MAX, '\n');
 
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
@@ -2153,7 +2153,7 @@ void HomeWork_5_Work_3_number8()
 void HomeWork_5_Work_3_number4()
 {
 	cin.clear();
-	cin.ignore(UINT_MAX, '\n');
+	cin.ignore(WINT_MAX, '\n');
 
 	cout << "3) 4.Поиск в тексте слова максимальной длины.\n";
 
@@ -2195,7 +2195,7 @@ void HomeWork_5_Work_4_number18()
 	cout << "5) 18.Написать программу, которая определяет количество учеников в классе, чей рост превышает средний. Рекомендуемый вид экрана во время работы программы приведен ниже(введенные пользователем данные выделены полужирным шрифтом).\n";
 
 	cin.clear();
-	cin.ignore(UINT_MAX, '\n');
+	cin.ignore(WINT_MAX, '\n');
 
 	bool NumberZeroWasFound = false;
 	int height = 0;
@@ -2218,7 +2218,7 @@ void HomeWork_5_Work_4_number18()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before, preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			cout << "\nНе вводите символы!" << '\n';
 		}
@@ -2251,7 +2251,7 @@ void HomeWork_5_Work_4_number32()
 	cout << "6) 32.Дано натуральное число x. Выбросить из записи числа х цифры 0 и 5, оставив прежним порядок остальных цифр. Например, из числа 590155069 должно получиться 9169.\n";
 
 	cin.clear();
-	cin.ignore(UINT_MAX, '\n');
+	cin.ignore(WINT_MAX, '\n');
 
 	bool numberWasCorrect = false;
 	unsigned long long number = 0;
@@ -2266,7 +2266,7 @@ void HomeWork_5_Work_4_number32()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before, preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			cout << "Введённое число слишком большое либо не число вовсе!" << '\n';
 		}
@@ -2340,7 +2340,7 @@ void HomeWork_5_Work_5_number21()
 				// Unlocking cin from (translate char to int) error
 				cin.clear();
 				// Ignoring all data in cin buffer before, preparing for new input from console
-				cin.ignore(UINT_MAX, '\n');
+				cin.ignore(WINT_MAX, '\n');
 
 				cout << "Не вводите символы!" << '\n';
 			}
@@ -2449,7 +2449,7 @@ void HomeWork_1_ShowWork() {
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			cout << "Вы ввели символ вместо номера, ошибка!\n" << '\n';
 			isWorkNumberCorrect = false;
@@ -2499,7 +2499,7 @@ void HomeWork_2_ShowWork() {
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			cout << "Вы ввели символ вместо номера, ошибка!\n";
 			isWorkNumberCorrect = false;
@@ -2549,7 +2549,7 @@ void HomeWork_3_ShowWork() {
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			cout << "Вы ввели символ вместо номера, ошибка!\n";
 			isWorkNumberCorrect = false;
@@ -2599,7 +2599,7 @@ void HomeWork_4_ShowWork() {
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			cout << "Вы ввели символ вместо номера, ошибка!\n";
 			isWorkNumberCorrect = false;
@@ -2660,7 +2660,7 @@ void HomeWork_5_ShowWork() {
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			cout << "Вы ввели символ вместо номера, ошибка!\n";
 			isWorkNumberCorrect = false;
@@ -2718,7 +2718,7 @@ void HomeWork_ShowWorks()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			cout << "Вы ввели символ вместо номера, ошибка!\n";
 			isWorkNumberCorrect = false;

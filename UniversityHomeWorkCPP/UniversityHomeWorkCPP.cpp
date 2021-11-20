@@ -2,8 +2,6 @@
 #include <vector>
 #include <cstdlib> 
 #include <fstream>
-#include <filesystem>
-#include <windows.h>
 #include <string>
 #include <iomanip>
 
@@ -52,7 +50,7 @@ void Spinner_Work_1()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
 				cout << "Ошибка, вы ввели неправильно цену корпуса спинера!\n";
@@ -108,7 +106,7 @@ void Spinner_Work_2()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
 				cout << "Ошибка, вы ввели неправильно количество лопостей!\n";
@@ -184,7 +182,7 @@ void Not_Spinner_Work_3()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
 				cout << "Ошибка, вы ввели неправильно ширину бумаги!\n";
@@ -322,7 +320,7 @@ void Cupe_Work_4()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			if (isCorrectFreeSeatsCount == false)
 				cout << "Ошибка, вы ввели неправильно количество мест!\n";
@@ -375,7 +373,7 @@ void Cinema_Work_5()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
 				cout << "Ошибка, вы ввели неправильно количество свободных мест!\n";
@@ -441,7 +439,7 @@ void HomeWork_ShowWorks()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			cout << "Вы ввели символ вместо номера, ошибка!\n";
 			isWorkNumberCorrect = false;
@@ -477,9 +475,6 @@ void HomeWork_ShowWorks()
 
 int main()
 {
-	SetConsoleCP(1251);
-	SetConsoleOutputCP(1251);
-	std::ios::sync_with_stdio(false);
 	setlocale(LC_CTYPE, "rus");
 
 	//HomeWork_ShowWorks();

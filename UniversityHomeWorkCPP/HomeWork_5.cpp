@@ -26,7 +26,7 @@ void Work_1_Algoritm_Evklida()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before, preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			cout << "Не вводите символы!" << '\n';
 			correctNumbers = false;
@@ -78,7 +78,7 @@ void Work_2_Resheto_Eratosfena()
 		if (cin.fail() || correctNumber < 0)
 		{
 			cin.clear();
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 		}
 		else
 			correctNumber = true;
@@ -193,7 +193,7 @@ void Work_4_number18()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before, preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			cout << "\nНе вводите символы!" << '\n';
 		}
@@ -237,7 +237,7 @@ void Work_4_number32()
 			// Unlocking cin from (translate char to int) error
 			cin.clear();
 			// Ignoring all data in cin buffer before, preparing for new input from console
-			cin.ignore(UINT_MAX, '\n');
+			cin.ignore(WINT_MAX, '\n');
 
 			cout << "\nНе вводите не натуральное число!" << '\n';
 		}
@@ -309,7 +309,7 @@ void Work_5_number21()
 				// Unlocking cin from (translate char to int) error
 				cin.clear();
 				// Ignoring all data in cin buffer before, preparing for new input from console
-				cin.ignore(UINT_MAX, '\n');
+				cin.ignore(WINT_MAX, '\n');
 
 				cout << "Не вводите символы!" << '\n';
 			}
