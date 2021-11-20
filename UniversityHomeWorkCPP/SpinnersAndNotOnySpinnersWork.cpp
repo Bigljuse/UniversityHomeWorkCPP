@@ -9,7 +9,6 @@
 
 using namespace std;
 
-
 void Spinner_Work_1()
 {
 	int BodyPrice = 0;
@@ -77,9 +76,11 @@ void Spinner_Work_1()
 	countedPrice -= WingPrice;
 	wingsCount--;
 
-	cout << "Всего лопостей у такого спинера может быть: " << wingsCount << '\n';
+	if (wingsCount <= 0)
+		cout << "Такого спинера нельзя собрать\n";
+	else
+		cout << "Всего лопостей у такого спинера может быть: " << wingsCount << '\n';
 }
-
 
 void Spinner_Work_2()
 {
@@ -127,7 +128,7 @@ void Spinner_Work_2()
 
 		if (spinnersWingsCount == TotalWingsCount)
 		{
-			cout << ThreeSpinner << '\n' << FourSpinner << '\n';
+			cout << "Количество спинеров с 3 лопостями: " << ThreeSpinner << "\nКоличество спинеров с 4 лопостями: " << FourSpinner << '\n';
 			return;
 		}
 
@@ -150,8 +151,6 @@ void Spinner_Work_2()
 	}
 
 	cout << "0\n0\n";
-
-	//cout << "Всего лопостей у такого спинера может быть: " << wingsCount << '\n';
 }
 
 void Not_Spinner_Work_3()
@@ -202,7 +201,10 @@ void Not_Spinner_Work_3()
 	for (int second = 1; second <= n; second++)
 		rowsAnswer += linesAnswer * second;
 
-	cout << rowsAnswer << '\n';
+	if (rowsAnswer <= 0)
+		cout << "Число слишком большое в ответе получается\n";
+	else
+		cout << rowsAnswer << '\n';
 }
 
 class Cupe
@@ -251,9 +253,10 @@ int GetFreeCupeCountInRow(vector<Cupe> seatsArray)
 		}
 	}
 
-	freeCupeCount = freeCupeInRow;
-
-	return freeCupeCount;
+	if (freeCupeCount != 0)
+		return freeCupeCount;
+	else
+		return freeCupeInRow;
 }
 
 void Cupe_Work_4()
@@ -328,7 +331,7 @@ void Cupe_Work_4()
 		}
 	} while (isCorrectFreeSeatNumber == false || isCorrectFreeSeatsCount == false || InputedSeatsCount < FreeSeatsCount);
 
-	cout << "Свободно " << GetFreeCupeCountInRow(cupeArray) << " под ряд купе в вагоне.\n";
+	cout << "Свободно подряд " << GetFreeCupeCountInRow(cupeArray) << " купе в вагоне.\n";
 }
 
 int GetMaxNumber(vector<int> arrayOfNumbers)
