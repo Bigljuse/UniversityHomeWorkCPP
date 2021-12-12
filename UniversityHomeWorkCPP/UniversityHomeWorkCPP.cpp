@@ -4,47 +4,38 @@
 #include <fstream>
 #include <string>
 #include <iomanip>
+#include <thread>
 
 using namespace std;
 
-void Spinner_Work_1()
+void Work_1()
 {
-	int BodyPrice = 0;
-	int WingPrice = 0;
-	int FinalPrice = 0;
-
-	int countedPrice = 0;
+	int borderLeft = 0;
+	int BorderRight = 0;
 
 	bool firstNumberIsCorrect = false;
 	bool SecondNumberIsCorrect = false;
-	bool ThirdNumberIsCorrect = false;
+
+	cout << "1) Пифагорово число (пифагорова тройка)\n";
 
 	do
 	{
 		if (firstNumberIsCorrect == false) {
-			cout << "Введите стоимость корпуса спинера: ";
-			cin >> BodyPrice;
+			cout << "Введите первое число: ";
+			cin >> borderLeft;
 
 			if (cin.fail() == false)
 				firstNumberIsCorrect = true;
 		}
 
 		if (SecondNumberIsCorrect == false && cin.fail() == false) {
-			cout << "Введите стоимость лопости спинера: ";
-			cin >> WingPrice;
+			cout << "Введите второе число: ";
+			cin >> BorderRight;
 
 			if (cin.fail() == false)
 				SecondNumberIsCorrect = true;
 		}
 
-		if (ThirdNumberIsCorrect == false && cin.fail() == false) {
-			cout << "Введите максимальную стоимость спинера: ";
-			cin >> FinalPrice;
-
-			if (cin.fail() == false)
-				ThirdNumberIsCorrect = true;
-		}
-
 		if (cin.fail())
 		{
 			// Unlocking cin from (translate char to int) error
@@ -53,52 +44,76 @@ void Spinner_Work_1()
 			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
-				cout << "Ошибка, вы ввели неправильно цену корпуса спинера!\n";
+				cout << "Ошибка, вы ввели в первую переменную не число!\n";
 			else if (SecondNumberIsCorrect == false)
-				cout << "Ошибка, вы ввели неправильно стоимость лопости спинера!\n";
-			else if (ThirdNumberIsCorrect == false)
-				cout << "Ошибка, вы ввели неправильно финальную стоимость спинера!\n";
+				cout << "Ошибка, вы ввели во вторую переменную не число!\n";
 		}
-	} while (firstNumberIsCorrect == false || SecondNumberIsCorrect == false || ThirdNumberIsCorrect == false);
+	} while (firstNumberIsCorrect == false || SecondNumberIsCorrect == false);
 
-	countedPrice += BodyPrice;
-
-	int wingsCount = 0;
-
-	while (countedPrice < FinalPrice)
+	if (borderLeft > BorderRight)
 	{
-		countedPrice += WingPrice;
-		wingsCount++;
+		int tmp = borderLeft;
+		borderLeft = BorderRight;
+		BorderRight = tmp;
 	}
 
-	countedPrice -= WingPrice;
-	wingsCount--;
+	cout << "Пифагоровы тройки чисел от " << borderLeft << " до " << BorderRight << " включительно:\n";
+	for (int i = borderLeft; i <= BorderRight; i++)
+	{
+		for (int j = borderLeft; j <= BorderRight; j++)
+		{
+			for (int k = borderLeft; k <= BorderRight; k++)
+			{
+				if (i * i + j * j == k * k)
+					std::cout << "{" << i << "," << j << "," << k << "}\n";
+			}
+		}
+	}
 
-	if (wingsCount <= 0)
-		cout << "Такого спинера нельзя собрать\n";
-	else
-		cout << "Всего лопостей у такого спинера может быть: " << wingsCount << '\n';
+	return;
 }
 
-void Spinner_Work_2()
+bool is_perfect(int num)
 {
-	int TotalWingsCount = 0;
+	int sum = 0;
+
+	for (int j = 1; j < num; j++)
+	{
+		if (num % j == 0)
+			sum += j;
+	}
+
+	if (sum == num)
+		return true;
+
+	return false;
+}
+void Work_2()
+{
+	int borderLeft = 0;
+	int BorderRight = 0;
 
 	bool firstNumberIsCorrect = false;
+	bool SecondNumberIsCorrect = false;
+
+	cout << "1) Совершенные числа\n";
 
 	do
 	{
 		if (firstNumberIsCorrect == false) {
-			cout << "Введите количество лопостей: ";
-			cin >> TotalWingsCount;
+			cout << "Введите первое число: ";
+			cin >> borderLeft;
 
 			if (cin.fail() == false)
 				firstNumberIsCorrect = true;
-			if (TotalWingsCount <= 2)
-			{
-				cout << "0\n0\n";
-				return;
-			}
+		}
+
+		if (SecondNumberIsCorrect == false && cin.fail() == false) {
+			cout << "Введите второе число: ";
+			cin >> BorderRight;
+
+			if (cin.fail() == false)
+				SecondNumberIsCorrect = true;
 		}
 
 		if (cin.fail())
@@ -109,72 +124,186 @@ void Spinner_Work_2()
 			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
-				cout << "Ошибка, вы ввели неправильно количество лопостей!\n";
+				cout << "Ошибка, вы ввели в первую переменную не число!\n";
+			else if (SecondNumberIsCorrect == false)
+				cout << "Ошибка, вы ввели во вторую переменную не число!\n";
+		}
+	} while (firstNumberIsCorrect == false || SecondNumberIsCorrect == false);
+
+	if (borderLeft > BorderRight)
+	{
+		int tmp = borderLeft;
+		borderLeft = BorderRight;
+		BorderRight = tmp;
+	}
+
+	for (int i = borderLeft; i < BorderRight; ++i) {
+		if (is_perfect(i)) {
+			cout << i << endl;
+		}
+	}
+}
+
+void Work_3()
+{
+	int borderLeft = 0;
+	int BorderRight = 0;
+
+	bool firstNumberIsCorrect = false;
+	bool SecondNumberIsCorrect = false;
+	do
+	{
+		if (firstNumberIsCorrect == false) {
+			cout << "Введите первое число: ";
+			cin >> borderLeft;
+
+			if (cin.fail() == false)
+				firstNumberIsCorrect = true;
+		}
+
+		if (SecondNumberIsCorrect == false && cin.fail() == false) {
+			cout << "Введите второе число: ";
+			cin >> BorderRight;
+
+			if (cin.fail() == false)
+				SecondNumberIsCorrect = true;
+		}
+
+		if (cin.fail())
+		{
+			// Unlocking cin from (translate char to int) error
+			cin.clear();
+			// Ignoring all data in cin buffer before preparing for new input from console
+			cin.ignore(WINT_MAX, '\n');
+
+			if (firstNumberIsCorrect == false)
+				cout << "Ошибка, вы ввели в первую переменную не число!\n";
+			else if (SecondNumberIsCorrect == false)
+				cout << "Ошибка, вы ввели во вторую переменную не число!\n";
+		}
+	} while (firstNumberIsCorrect == false || SecondNumberIsCorrect == false);
+
+	if (borderLeft > BorderRight)
+	{
+		int tmp = borderLeft;
+		borderLeft = BorderRight;
+		BorderRight = tmp;
+	}
+
+	int s = 0;
+	int o = 0;
+	int m = 0;
+
+	cout << "на интервале " << '[' << borderLeft << ',' << BorderRight << "] найдены ";
+
+	for (int i = BorderRight; i > borderLeft; --i)
+	{
+		s = i * i;
+
+		for (m = 10; m < i; m *= 10);
+
+		o = s % m;
+
+		if (i == o)
+			cout << i << ", ";
+	}
+}
+
+void Work_4()
+{
+	int number1 = 0;
+
+	bool firstNumberIsCorrect = false;
+	do
+	{
+		if (firstNumberIsCorrect == false) {
+			cout << "Введите число фибоначчи: ";
+			cin >> number1;
+
+			if (cin.fail() == false)
+				firstNumberIsCorrect = true;
+		}
+
+		if (cin.fail())
+		{
+			// Unlocking cin from (translate char to int) error
+			cin.clear();
+			// Ignoring all data in cin buffer before preparing for new input from console
+			cin.ignore(WINT_MAX, '\n');
+
+			if (firstNumberIsCorrect == false)
+				cout << "Ошибка, вы ввели не число!\n";
 		}
 	} while (firstNumberIsCorrect == false);
 
-	int ThreeSpinner = 1;
-	int FourSpinner = 1;
-	int spinnersWingsCount = 0;
 
-	bool firstError = false;
-	bool secondError = false;
+	int a = 0;
+	int b = 1;
 
-	while (firstError == false || secondError == false)
+	for (int i = 0; i < number1; i++)
 	{
-		spinnersWingsCount = 3 * ThreeSpinner + 4 * FourSpinner;
-
-		if (spinnersWingsCount == TotalWingsCount)
-		{
-			cout << "Количество спинеров с 3 лопостями: " << ThreeSpinner << "\nКоличество спинеров с 4 лопостями: " << FourSpinner << '\n';
-			return;
-		}
-
-		if (spinnersWingsCount < TotalWingsCount)
-			FourSpinner++;
-		else
-		{
-			ThreeSpinner++;
-			FourSpinner = 1;
-
-			if (firstError == false) {
-				firstError = true;
-				continue;
-			}
-			if (secondError == false) {
-				secondError = true;
-				continue;
-			}
-		}
+		a = a + b;
+		b = a - b;
 	}
 
-	cout << "0\n0\n";
+	cout << number1 << "-ое число Фибоначчи = " << a << '\n';
 }
 
-void Not_Spinner_Work_3()
+int get_digit_count(int const number)
 {
-	int n = 0;
-	int m = 0;
+	int digits = 0;
+	int remainder = number;
+
+	while (remainder > 0)
+	{
+		++digits;
+		remainder /= 10;
+	}
+
+	return digits;
+}
+
+bool is_armstrong_number(int const number)
+{
+	int const digit_count = get_digit_count(number);
+	int remainder = number;
+	int sum = 0;
+
+	while (remainder > 0)
+	{
+		int const last_digit = remainder % 10;
+		sum += pow(last_digit, digit_count);
+		remainder /= 10;
+	}
+
+	return number == sum;
+}
+
+void asyncCounter(long long const number1, int startNumberArg, int endNumberArg) {
+	long long startNumber = pow(10, number1) / 10 * startNumberArg + 1;
+	long long maxNumber = pow(10, number1) / 10 * endNumberArg;
+
+	for (long long i = startNumber; i <= maxNumber; ++i)
+	{
+		if (is_armstrong_number(i))
+			if (get_digit_count(i) == number1)
+				cout << i << ' ';
+	}
+}
+
+void Work_5()
+{
+	int number1 = 0;
 
 	bool firstNumberIsCorrect = false;
-	bool SecondNumberIsCorrect = false;
-
 	do
 	{
 		if (firstNumberIsCorrect == false) {
-			cout << "Введите ширину бумаги: ";
-			cin >> n;
+			cout << "Введите количество цифр в числе Армстронга: ";
+			cin >> number1;
 
-			if (cin.fail() == false && n > 0)
+			if (cin.fail() == false)
 				firstNumberIsCorrect = true;
-		}
-
-		if (SecondNumberIsCorrect == false && cin.fail() == false) {
-			cout << "Введите длину бумаги: ";
-			cin >> m;
-
-			if (cin.fail() == false && m > 0)
-				SecondNumberIsCorrect = true;
 		}
 
 		if (cin.fail())
@@ -185,240 +314,60 @@ void Not_Spinner_Work_3()
 			cin.ignore(WINT_MAX, '\n');
 
 			if (firstNumberIsCorrect == false)
-				cout << "Ошибка, вы ввели неправильно ширину бумаги!\n";
-			else if (SecondNumberIsCorrect == false)
-				cout << "Ошибка, вы ввели неправильно длину бумаги!\n";
+				cout << "Ошибка, вы ввели не число!\n";
 		}
-	} while (firstNumberIsCorrect == false || SecondNumberIsCorrect == false);
+	} while (firstNumberIsCorrect == false);
 
-	int linesAnswer = 0;
-	int rowsAnswer = 0;
+	if (number1 > 10)
+	{
+		cout << "Вы слишком долго будете ждать такого числа с " << number1 << "цифрами\n";
+		return;
+	}
 
-	for (int first = 1; first <= n; first++)
-		linesAnswer += first;
-	for (int second = 1; second <= n; second++)
-		rowsAnswer += linesAnswer * second;
+	long long maxNumber = pow(10, number1);
 
-	if (rowsAnswer <= 0)
-		cout << "Число слишком большое в ответе получается\n";
+	if (number1 >= 8)
+	{
+		thread func_thread1(asyncCounter, number1, 1, 2);
+		thread func_thread2(asyncCounter, number1, 2, 3);
+		thread func_thread3(asyncCounter, number1, 3, 4);
+		thread func_thread4(asyncCounter, number1, 4, 5);
+		thread func_thread5(asyncCounter, number1, 5, 6);
+		thread func_thread6(asyncCounter, number1, 6, 7);
+		thread func_thread7(asyncCounter, number1, 7, 8);
+		thread func_thread8(asyncCounter, number1, 8, 9);
+		thread func_thread9(asyncCounter, number1, 9, 10);
+
+		maxNumber = maxNumber / 10;
+
+		for (long long i = 0; i <= maxNumber; ++i)
+		{
+			if (is_armstrong_number(i))
+				if (get_digit_count(i) == number1)
+					cout << i << ' ';
+		}
+		func_thread1.join();
+		func_thread2.join();
+		func_thread3.join();
+		func_thread4.join();
+		func_thread5.join();
+		func_thread6.join();
+		func_thread7.join();
+		func_thread8.join();
+		func_thread9.join();
+		cout << '\n';
+	}
 	else
-		cout << rowsAnswer << '\n';
-}
-
-class Cupe
-{
-public:
-	vector<int> seats;
-
-	int FreeSeats = 0;
-
-	bool FreeCupe = false;
-};
-
-vector<Cupe> SetFreeSeat(int freeSeatNumber, vector<Cupe> seatsArray)
-{
-	for (int cupeNumber = 0; cupeNumber < seatsArray.size(); cupeNumber++)
 	{
-		for (int cupeSeatNumber = 0; cupeSeatNumber < seatsArray[cupeNumber].seats.size(); cupeSeatNumber++) {
-			if (freeSeatNumber == seatsArray[cupeNumber].seats[cupeSeatNumber])
-			{
-				seatsArray[cupeNumber].seats[cupeSeatNumber] = -1;
-				seatsArray[cupeNumber].FreeSeats++;
-
-				if (seatsArray[cupeNumber].FreeSeats == 6)
-					seatsArray[cupeNumber].FreeCupe = true;
-
-				return seatsArray;
-			}
+		for (int i = 0; i <= maxNumber; ++i)
+		{
+			if (is_armstrong_number(i))
+				if (get_digit_count(i) == number1)
+					cout << i << ' ';
 		}
+
+		cout << '\n';
 	}
-}
-
-int GetFreeCupeCountInRow(vector<Cupe> seatsArray)
-{
-	int freeCupeCount = 0;
-	int freeCupeInRow = 0;
-	for (Cupe cupe : seatsArray)
-	{
-		if (cupe.FreeCupe)
-			freeCupeCount++;
-		else
-		{
-			if (freeCupeCount != 0)
-				freeCupeInRow = freeCupeCount;
-
-			freeCupeCount = 0;
-		}
-	}
-
-	if (freeCupeCount != 0)
-		return freeCupeCount;
-	else
-		return freeCupeInRow;
-}
-
-void Cupe_Work_4()
-{
-	vector<Cupe> cupeArray;
-
-	for (int i = 1, b = 1; i <= 9; i++)
-	{
-		Cupe newCupe = { {b,b + 1,b + 2,b + 3,54 + (2 - 2 * i),54 + (1 - 2 * i)},0 ,false };
-		cupeArray.push_back(newCupe);
-		b += 4;
-	}
-
-	int FreeSeatsCount = 0;
-	int InputedSeatsCount = 0;
-	int InputedSeat = 0;
-
-	bool isCorrectFreeSeatsCount = false;
-	bool isCorrectFreeSeatNumber = false;
-
-	do
-	{
-		if (isCorrectFreeSeatsCount == false)
-		{
-			cout << "Введите количество свободных мест: ";
-			cin >> FreeSeatsCount;
-
-			if (cin.fail() == true && (FreeSeatsCount > 5 && FreeSeatsCount < 55))
-				isCorrectFreeSeatsCount = false;
-			else if (FreeSeatsCount > 54)
-			{
-				cout << "Количество свободных мест превышает 54 места. По условию максимум 54 места включительно.\n";
-				return;
-			}
-			else if (FreeSeatsCount < 6)
-			{
-				cout << "В вагоне нет свободных купе\n";
-				return;
-			}
-			else
-			{
-				isCorrectFreeSeatsCount = true;
-			}
-		}
-
-		if (cin.fail() == false)
-		{
-			cout << "Введите номер свободного места (от 0 до 54): " << InputedSeatsCount + 1 << " из " << FreeSeatsCount << ": ";
-			cin >> InputedSeat;
-
-			if (cin.fail() == false && (InputedSeat > 0 && InputedSeat < 55))
-			{
-				InputedSeatsCount++;
-				cupeArray = SetFreeSeat(InputedSeat, cupeArray);
-			}
-
-			if (InputedSeatsCount == FreeSeatsCount)
-				isCorrectFreeSeatNumber = true;
-		}
-
-		if (cin.fail())
-		{
-			// Unlocking cin from (translate char to int) error
-			cin.clear();
-			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(WINT_MAX, '\n');
-
-			if (isCorrectFreeSeatsCount == false)
-				cout << "Ошибка, вы ввели неправильно количество мест!\n";
-			else if (isCorrectFreeSeatNumber == false)
-				cout << "Ошибка, вы ввели неправильно свободное место!\n";
-		}
-	} while (isCorrectFreeSeatNumber == false || isCorrectFreeSeatsCount == false || InputedSeatsCount < FreeSeatsCount);
-
-	cout << "Свободно подряд " << GetFreeCupeCountInRow(cupeArray) << " купе в вагоне.\n";
-}
-
-int GetMaxNumber(vector<int> arrayOfNumbers)
-{
-	int maxNumber = 0;
-	for (int number : arrayOfNumbers)
-		if (maxNumber < number)
-			maxNumber = number;
-	return maxNumber;
-}
-
-void Cinema_Work_5()
-{
-	vector<int> cinemaFreeSeatsGroups;
-	int freeSeats = 0;
-	int schoolBoys = 0;
-
-	bool firstNumberIsCorrect = false;
-	bool SecondNumberIsCorrect = false;
-
-	do
-	{
-		if (firstNumberIsCorrect == false) {
-			cout << "Введите количество свободных мест: ";
-			cin >> freeSeats;
-
-			if (cin.fail() == false && freeSeats > 0)
-				firstNumberIsCorrect = true;
-		}
-
-		if (SecondNumberIsCorrect == false && cin.fail() == false) {
-			cout << "Введите количество школьников: ";
-			cin >> schoolBoys;
-
-			if (cin.fail() == false && schoolBoys > 0)
-				SecondNumberIsCorrect = true;
-		}
-
-		if (cin.fail())
-		{
-			// Unlocking cin from (translate char to int) error
-			cin.clear();
-			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(WINT_MAX, '\n');
-
-			if (firstNumberIsCorrect == false)
-				cout << "Ошибка, вы ввели неправильно количество свободных мест!\n";
-			else if (SecondNumberIsCorrect == false)
-				cout << "Ошибка, вы ввели неправильно количество школьников!\n";
-		}
-	} while (firstNumberIsCorrect == false || SecondNumberIsCorrect == false);
-
-	int boyleftFreeSeatsCount = 0;
-	int boyrightFreeSeatsCount = 0;
-
-	for (int schoolBoyNumber = 1; schoolBoyNumber <= schoolBoys; schoolBoyNumber++)
-	{
-		int maxFreeSeats = GetMaxNumber(cinemaFreeSeatsGroups);
-
-		if (maxFreeSeats == 0)
-		{
-			freeSeats -= 1;
-
-			boyleftFreeSeatsCount = freeSeats / 2;
-			boyrightFreeSeatsCount = freeSeats - boyleftFreeSeatsCount;
-		}
-		else
-		{
-			maxFreeSeats -= 1;
-
-			boyleftFreeSeatsCount = maxFreeSeats / 2;
-			boyrightFreeSeatsCount = maxFreeSeats - boyleftFreeSeatsCount;
-
-			cinemaFreeSeatsGroups.pop_back();
-		}
-
-		if (boyleftFreeSeatsCount < boyrightFreeSeatsCount)
-		{
-			cinemaFreeSeatsGroups.push_back(boyleftFreeSeatsCount);
-			cinemaFreeSeatsGroups.push_back(boyrightFreeSeatsCount);
-		}
-		else
-		{
-			cinemaFreeSeatsGroups.push_back(boyrightFreeSeatsCount);
-			cinemaFreeSeatsGroups.push_back(boyleftFreeSeatsCount);
-		}
-	}
-
-	cout << "От последнего севшего школника свободных мест:\nСлева свободно: " << boyleftFreeSeatsCount << "\nСправа свободно: " << boyrightFreeSeatsCount << '\n';
 }
 
 void HomeWork_ShowWorks()
@@ -426,12 +375,21 @@ void HomeWork_ShowWorks()
 	int homeWorkNumber = 1;
 	bool isWorkNumberCorrect = false;
 
-	cout << "1)Спинеры № 1\n2)Снова спинеры № 2\n3)Не про спинеры № 3\n4)Плацкарный вагон № 4\n5)Кинотеатр № 5\n";
+	cout << "1)Пифагоровы числа"
+		<< "\n2)Совершенные числа"
+		<< "\n3)Автоморфные числа"
+		<< "\n4)Числа Фибоначчи"
+		<< "\n5)Числа Армстронга (Внимание, используется многопоточность, ваш процессор может нагрется очень сильно при n >= 9!)"
+		<< "\n6)Числа - близнецы"
+		<< "\n7)Числа Софи Жермен"
+		<< "\n8)Числа Каталана"
+		<< "\n9)Числа Нараняны"
+		<< "\n10)Числа Якобсталя\n";
 
 	while (isWorkNumberCorrect == false) {
 
 		isWorkNumberCorrect = true;
-		cout << "Какой номер домашней работы вы хотите проверить про спиннеры: ";
+		cout << "Какой номер из Структурных чисел вы хотите проверить: ";
 		cin >> homeWorkNumber;
 
 		if (cin.fail())
@@ -441,7 +399,7 @@ void HomeWork_ShowWorks()
 			// Ignoring all data in cin buffer before preparing for new input from console
 			cin.ignore(WINT_MAX, '\n');
 
-			cout << "Вы ввели символ вместо номера, ошибка!\n";
+			cout << "Вы ввели неверно номер, ошибка!\n";
 			isWorkNumberCorrect = false;
 			continue;
 		}
@@ -449,19 +407,34 @@ void HomeWork_ShowWorks()
 		switch (homeWorkNumber)
 		{
 		case 1:
-			Spinner_Work_1();
+			Work_1();
 			break;
 		case 2:
-			Spinner_Work_2();
+			Work_2();
 			break;
 		case 3:
-			Not_Spinner_Work_3();
+			Work_3();
 			break;
 		case 4:
-			Cupe_Work_4();
+			Work_4();
 			break;
 		case 5:
-			Cinema_Work_5();
+			Work_5();
+			break;
+		case 6:
+
+			break;
+		case 7:
+
+			break;
+		case 8:
+
+			break;
+		case 9:
+
+			break;
+		case 10:
+
 			break;
 
 		default:
@@ -477,8 +450,7 @@ int main()
 {
 	setlocale(LC_CTYPE, "rus");
 
-	//HomeWork_ShowWorks();
-	HomeWork_ShowWorks();
+	Work_5();
 
 	system("pause");
 	return 0;

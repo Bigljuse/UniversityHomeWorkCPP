@@ -19,7 +19,7 @@ void Work_1_Algoritm_Evklida()
 	do
 	{
 		cout << "¬ведите первое и второе число: ";
-		cin >> firstNumber >> secondNumber;;
+		cin >> firstNumber >> secondNumber;
 
 		if (cin.fail())
 		{
