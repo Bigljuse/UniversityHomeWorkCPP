@@ -5,8 +5,11 @@
 #include <string>
 #include <iomanip>
 #include <windows.h>
+#include <signal.h>
 
 using namespace std;
+
+int aliveMicrobs = 0;
 
 class Symbol
 {
@@ -14,32 +17,77 @@ public:
 	char symbol;
 	int age;
 	bool isMicrob;
-	int neighborCount;
-	int deathTimer;
+	int aliveNeighbors;
 };
 
-void arrayCopy(Symbol(&arrayFrom)[21][21], Symbol(&arrayTo)[21][21])
+void arrayCopy(Symbol(&arrayFrom)[50][50], Symbol(&arrayTo)[50][50])
 {
-	for (int lineId = 0; lineId < 21; lineId++)
-	{
-		for (int columnId = 0; columnId < 21; columnId++)
-		{
+	for (int lineId = 0; lineId < 50; lineId++)
+		for (int columnId = 0; columnId < 50; columnId++)
 			arrayTo[lineId][columnId] = arrayFrom[lineId][columnId];
-		}
-	}
 }
 
-vector<string> GenerateRandomField(vector<char> fieldOfLife)
+int GetPopulationCount()
+{
+	bool isCorrectNumber = 0;
+	int populationCount = 0;
+
+	do
+	{
+		if (isCorrectNumber == false) {
+			cout << "Введите число поколений, которые программа должна обработать: ";
+			cin >> populationCount;
+
+			if (cin.fail() == false)
+				isCorrectNumber = true;
+		}
+
+		if (cin.fail())
+		{
+			// Unlocking cin from (translate char to int) error
+			cin.clear();
+			// Ignoring all data in cin buffer before preparing for new input from console
+			cin.ignore(WINT_MAX, '\n');
+
+			if (isCorrectNumber == false)
+				cout << "Ошибка, введено не число!\n";
+		}
+	} while (isCorrectNumber == false);
+
+	return populationCount;
+}
+
+vector<char> GetSymbolsFromConsole()
+{
+	cout << "Введите символы: ";
+	string symbolsStringArray = "";
+
+	do
+	{
+		getline(cin, symbolsStringArray);
+
+	} while (symbolsStringArray.size() == 0);
+
+	vector<char> symbolsArray;
+
+	for (auto symbol : symbolsStringArray)
+		if (symbol != ' ')
+			symbolsArray.push_back(symbol);
+
+	return symbolsArray;
+}
+
+vector<string> GenerateRandomField(vector<char> symbolsArray)
 {
 	string randomLine;
 	vector<string> linesOfWymbols;
 
-	for (int length = 0; length < 21; length++)
+	for (int length = 0; length < 50; length++)
 	{
-		for (int symbolId = 0; symbolId < 21; symbolId++)
+		for (int symbolId = 0; symbolId < 50; symbolId++)
 		{
-			int randomSymbolId = rand() % fieldOfLife.size();
-			char randomSymbol = fieldOfLife[randomSymbolId];
+			int randomSymbolId = rand() % symbolsArray.size();
+			char randomSymbol = symbolsArray[randomSymbolId];
 
 			randomLine.push_back(randomSymbol);
 		}
@@ -49,19 +97,21 @@ vector<string> GenerateRandomField(vector<char> fieldOfLife)
 	return linesOfWymbols;
 }
 
-void countMicrobsNeigbors(Symbol(&futureTime)[21][21])
+void CountMicrobsNeighbors(Symbol(&symbolsTable)[50][50])
 {
-	for (int symbolIdLine = 0; symbolIdLine < 21; symbolIdLine++)
+	for (int symbolIdLine = 0; symbolIdLine < 50; symbolIdLine++)
 	{
-		for (int symbolIdHeight = 0; symbolIdHeight < 21; symbolIdHeight++)
+		for (int symbolIdHeight = 0; symbolIdHeight < 50; symbolIdHeight++)
 		{
-			futureTime[symbolIdLine][symbolIdHeight].neighborCount = -1;
+			Symbol* microb = &symbolsTable[symbolIdLine][symbolIdHeight];
 
-			Symbol* microb = &futureTime[symbolIdLine][symbolIdHeight];
+			// Чтобы при проверке к поле 3 на 3 учитывать символ той же клетки, для которой идёт проверка.
+			if (microb->age > 0) 
+				microb->aliveNeighbors = -1;
+			else 
+				microb->aliveNeighbors = 0;
 
-			if ((*microb).isMicrob == false)
-				continue;
-
+			// Установка начала проверки квадрата размером 3 на 3
 			int checkerLineStart = symbolIdLine - 1;
 			int checkerColumnStart = symbolIdHeight - 1;
 
@@ -81,8 +131,8 @@ void countMicrobsNeigbors(Symbol(&futureTime)[21][21])
 					lineCounter++;
 				}
 
-				bool borderColumnCheck = columnCheck > 20;
-				bool borderLineCheck = lineCheck > 20;
+				bool borderColumnCheck = columnCheck > 49;
+				bool borderLineCheck = lineCheck > 49;
 
 				if (borderColumnCheck == true)
 				{
@@ -93,10 +143,10 @@ void countMicrobsNeigbors(Symbol(&futureTime)[21][21])
 				if (borderLineCheck == true)
 					break;
 
-				Symbol checker = futureTime[lineCheck][columnCheck];
+				Symbol microbChecker = symbolsTable[lineCheck][columnCheck];
 
-				if (checker.isMicrob == true && checker.age != 0)
-					(*microb).neighborCount++;
+				if (microbChecker.age > 0)
+					(*microb).aliveNeighbors++;
 
 				if (ColumnCounter == 2)
 				{
@@ -110,182 +160,166 @@ void countMicrobsNeigbors(Symbol(&futureTime)[21][21])
 	}
 }
 
-void MarkMicrobs(Symbol(&futureTime)[21][21], vector<string> fieldOfLife, char microbSymbol)
+void MarkMicrobs(Symbol(&symbolsTable)[50][50], vector<string> startField, char microbSymbol)
 {
-	for (int symbolLine = 0; symbolLine < 21; symbolLine++)
+	for (int symbolLine = 0; symbolLine < 50; symbolLine++)
 	{
-		for (int symbolColumn = 0; symbolColumn < 21; symbolColumn++)
+		for (int symbolColumn = 0; symbolColumn < 50; symbolColumn++)
 		{
-			char symbol = fieldOfLife[symbolLine][symbolColumn];
-			Symbol* microb = &futureTime[symbolLine][symbolColumn];
+			char symbol = startField[symbolLine][symbolColumn];
+			Symbol* microb = &symbolsTable[symbolLine][symbolColumn];
 
 			if (symbol == microbSymbol)
 			{
 				(*microb).isMicrob = true;
 				(*microb).age = 1;
-				(*microb).neighborCount = -1;
-				(*microb).symbol = symbol;
+				(*microb).aliveNeighbors = -1;
+				(*microb).symbol = microbSymbol;
 				continue;
 			}
 
-			(*microb).isMicrob = false;
+			(*microb).isMicrob = true;
 			(*microb).age = 0;
-			(*microb).neighborCount = -1;
-			(*microb).symbol = symbol;
+			(*microb).aliveNeighbors = 0;
+			(*microb).symbol = microbSymbol;
 		}
 	}
 }
 
-void ReviveDiedMicrobs(Symbol(&futureTime)[21][21])
+void ReviveDiedMicrobs(Symbol(&symbolsTable)[50][50])
 {
-	for (int symbolLine = 0; symbolLine < 21; symbolLine++)
+	for (int symbolLine = 0; symbolLine < 50; symbolLine++)
 	{
-		for (int symbolColumn = 0; symbolColumn < 21; symbolColumn++)
+		for (int symbolColumn = 0; symbolColumn < 50; symbolColumn++)
 		{
-			Symbol* microb = &futureTime[symbolLine][symbolColumn];
+			Symbol* microb = &symbolsTable[symbolLine][symbolColumn];
 
-			if (microb->isMicrob == false)
-				continue;
-
-			if (microb->age == 0 && microb->deathTimer > 1) 
-			{
-				microb->age = 1;
-				microb->deathTimer = 0;
-			}
+			if (microb->age == 0 && microb->aliveNeighbors == 3)
+				microb->age = 1;			
 		}
 	}
 }
 
-void KillAloneMicrobs(Symbol(&futureTime)[21][21])
+void KillMicrobs(Symbol(&symbolsTable)[50][50])
 {
-	for (int symbolLine = 0; symbolLine < 21; symbolLine++)
+	for (int symbolLine = 0; symbolLine < 50; symbolLine++)
 	{
-		for (int symbolColumn = 0; symbolColumn < 21; symbolColumn++)
+		for (int symbolColumn = 0; symbolColumn < 50; symbolColumn++)
 		{
-			Symbol* microb = &futureTime[symbolLine][symbolColumn];
+			Symbol* microb = &symbolsTable[symbolLine][symbolColumn];
 
-			if (microb->isMicrob == false)
-				continue;
-
-			if (microb->neighborCount < 2) 
-			{
-				microb->deathTimer++;
-				microb->age = 0;
-			}
+			if (microb->aliveNeighbors < 2 || microb->aliveNeighbors > 3)
+				microb->age = 0;			
 		}
 	}
 }
 
-void DocumentChanges(Symbol(&futureTime)[21][21], int pocolenie)
+void DocumentChanges(Symbol(&symbolsTable)[50][50], int pocolenie)
 {
 	string microbsLine;
-	vector<string> microbsFiel;
-	int aliveMicrobs = 0;
+	string microbSymbol = "";
+	vector<string> microbsField;
+
 	string workOutName = "work.out";
 	ofstream workDatStream;
-
 	workDatStream.open(workOutName, std::ios::app);
 
-	for (int symbolLine = 0; symbolLine < 21; symbolLine++)
+	for (int symbolLine = 0; symbolLine < 50; symbolLine++)
 	{
-		for (int symbolColumn = 0; symbolColumn < 21; symbolColumn++)
+		for (int symbolColumn = 0; symbolColumn < 50; symbolColumn++)
 		{
-			Symbol* microb = &futureTime[symbolLine][symbolColumn];
+			Symbol* microb = &symbolsTable[symbolLine][symbolColumn];
 
-			if (microb->isMicrob == false)
-			{
-				microbsLine += "_ ";
-				continue;
-			}
-			microbsLine += to_string(microb->age) + " ";
+			if (microb->age == 0)
+				microbsLine += "  ";
+			else
+				microbsLine += "* ";
 
 			if (microb->age <= 0)
 				continue;
 
 			aliveMicrobs++;
 		}
-		microbsFiel.push_back(microbsLine);
+		microbsField.push_back(microbsLine);
 		microbsLine.clear();
 
-		cout << microbsFiel[symbolLine] << '\n';
-		workDatStream << microbsFiel[symbolLine] << '\n';
+		cout << microbsField[symbolLine] << '\n';
+		workDatStream << microbsField[symbolLine] << '\n';
 	}
 
 	cout << "Живых микробов: " << aliveMicrobs << "\nПоколение: " << pocolenie << "\n\n";
-	workDatStream << "Живых микробов: " << aliveMicrobs << "\nПоколение: "<< pocolenie << "\n\n";
+	workDatStream << "Живых микробов: " << aliveMicrobs << "\nПоколение: " << pocolenie << "\n\n";
 
 	workDatStream.close();
 }
 
-void EvolveMicrobes(Symbol(&futureTime)[21][21])
+void EvolveMicrobes(Symbol(&symbolsTable)[50][50])
 {
-	for (int symbolLine = 0; symbolLine < 21; symbolLine++)
+	for (int symbolLine = 0; symbolLine < 50; symbolLine++)
 	{
-		for (int symbolColumn = 0; symbolColumn < 21; symbolColumn++)
+		for (int symbolColumn = 0; symbolColumn < 50; symbolColumn++)
 		{
-			Symbol* microb = &futureTime[symbolLine][symbolColumn];
+			Symbol* microb = &symbolsTable[symbolLine][symbolColumn];
 
-			if (microb->isMicrob == false)
-				continue;
-			if (microb->age == 12)
+			if (microb->age > 29)
 			{
-				microb->age == 0;
-				microb->isMicrob = false;
-				microb->neighborCount = -1;
-			}
-			if (microb->age == 0)
+				microb->age = 0;
 				continue;
+			}
+
+			if (microb->age <= 0)
+				continue;
+
 			microb->age++;
 		}
 	}
 }
 
-void SimulateEvolution(Symbol(&futureTime)[21][21], vector<string> startField, char microbSymbol, int step, int totalSteps)
+void SimulateEvolution(Symbol(&symbolsTable)[50][50], vector<string> startField, char microbSymbol, int totalSteps)
 {
-	MarkMicrobs(futureTime, startField, microbSymbol);
-	DocumentChanges(futureTime, step);
+	int step = 1;
+	system("cls");
+
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	MarkMicrobs(symbolsTable, startField, microbSymbol);
+	DocumentChanges(symbolsTable, step);
+
+	SetConsoleCursorPosition(consoleHandle, { 0,0 });
+	
 	do
 	{
-		countMicrobsNeigbors(futureTime);
-		KillAloneMicrobs(futureTime);
-		EvolveMicrobes(futureTime);
-		DocumentChanges(futureTime, step);
+		SetConsoleCursorPosition(consoleHandle, { 0,0 });
+		system("cls");
 
-		if (step % 2 == 0) {
-			ReviveDiedMicrobs(futureTime);
-			DocumentChanges(futureTime, step);
-		}
+		CountMicrobsNeighbors(symbolsTable);
+		EvolveMicrobes(symbolsTable);
+		KillMicrobs(symbolsTable);
+		ReviveDiedMicrobs(symbolsTable);
+		DocumentChanges(symbolsTable, step);
 
-		step++;
-		Sleep(400);
-	} while (step < totalSteps);
+		step++;		
+		Sleep(350);		
+	} while (step < totalSteps || aliveMicrobs > 0);
+}
+
+void Ctrl_C_Blocker(int singint) {
+	fflush(stdout);
+	signal(SIGINT, Ctrl_C_Blocker);
 }
 
 int main()
 {
+	///////////////
+	signal(SIGINT, Ctrl_C_Blocker);
+
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	srand(static_cast<unsigned int>(time(0)));
 
-	Symbol futureTime[21][21] = {};
-
-	///////////////
-	cout << "Введите символы: ";
-	string symbolsString = "";
-
-	do
-	{
-		getline(cin, symbolsString);
-
-	} while (symbolsString.size() == 0);
-
-	vector<char> symbolsArray;
-
-	for (auto symbol : symbolsString)
-		if (symbol != ' ')
-			symbolsArray.push_back(symbol);
+	Symbol symbolsTable[50][50] = {};
 	///////////////
 
+	vector<char> symbolsArray = GetSymbolsFromConsole();
 
 	///////////////
 	int microbRandomSymbolId = rand() % symbolsArray.size();
@@ -295,44 +329,15 @@ int main()
 	vector<string> startField = GenerateRandomField(symbolsArray);
 	///////////////
 
-
-	/////////////
-	bool isCorrectNumber = 0;
-	int totalSteps = 0;
-
-	do
-	{
-		if (isCorrectNumber == false) {
-			cout << "Введите число поколений: ";
-			cin >> totalSteps;
-
-			if (cin.fail() == false)
-				isCorrectNumber = true;
-		}
-
-		if (cin.fail())
-		{
-			// Unlocking cin from (translate char to int) error
-			cin.clear();
-			// Ignoring all data in cin buffer before preparing for new input from console
-			cin.ignore(WINT_MAX, '\n');
-
-			if (isCorrectNumber == false)
-				cout << "Ошибка, вы ввели неправильно число поколений!\n";
-		}
-	} while (isCorrectNumber == false);
-	///////////////
-
-
 	///////////////
 	string workDatName = "work.dat";
 	ofstream workDatStream;
 	workDatStream.open(workDatName);
-	for (int lineId = 0; lineId < 21; lineId++)
+	for (int lineId = 0; lineId < 50; lineId++)
 		workDatStream << startField[lineId] << '\n';
 	workDatStream.close();
 
-	SimulateEvolution(futureTime, startField, microbSymbol, 1, totalSteps);
+	SimulateEvolution(symbolsTable, startField, microbSymbol, GetPopulationCount());
 
 	system("pause");
 }
