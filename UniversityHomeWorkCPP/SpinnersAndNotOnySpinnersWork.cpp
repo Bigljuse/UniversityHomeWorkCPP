@@ -198,7 +198,7 @@ void Not_Spinner_Work_3()
 
 	for (int first = 1; first <= n; first++)
 		linesAnswer += first;
-	for (int second = 1; second <= n; second++)
+	for (int second = 1; second <=m ; second++)
 		rowsAnswer += linesAnswer * second;
 
 	if (rowsAnswer <= 0)
